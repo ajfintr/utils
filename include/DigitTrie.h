@@ -31,9 +31,9 @@ public:
                         this->character[i] = NULL;
         }
 
-        inline void insert(std::string, TriPos pos);
-        inline TriPos search(bufrefnew& buf) const;
-        inline TriPos search(std::string) const;
+        inline void insert(const std::string&, TriPos pos);
+        inline TriPos search(const bufref& buf) const;
+        inline TriPos search(const std::string&) const;
 };
 
 #define NOT_IN_TRI -1
@@ -47,7 +47,7 @@ public:
       _nullPos = insert("0");      
    }
    //insert into tri and return the position
-   TriPos insert(std::string val) {
+   TriPos insert(const std::string& val) {
       TriPos pos = search(val);
         if(NOT_IN_TRI == pos) {
          pos = _size;
@@ -58,9 +58,9 @@ public:
         return pos;
    }
 
-   TriPos search(std::string val) const  { return _head.search(val); }
+   TriPos search(const std::string& val) const  { return _head.search(val); }
 
-  void searchAndAddToContainer(bufrefnew& key, bufrefnew& val, std::vector<bufrefnew>& container) const
+  void searchAndAddToContainer(bufref& key, bufref& val, std::vector<bufref>& container) const
    {
      //if(isdigit(*key.buf))
      {
@@ -82,7 +82,7 @@ private:
 
 
 // Iterative function to insert a key in the DigitTrie
-void DigitTrie::insert(std::string key, TriPos pos)
+void DigitTrie::insert(const std::string& key, TriPos pos)
 {
         // start from root node
         DigitTrie* curr = this;
@@ -102,7 +102,7 @@ void DigitTrie::insert(std::string key, TriPos pos)
 
 // Iterative function to search a key in DigitTrie. It returns true
 // if the key is found in the DigitTrie, else it returns false
-TriPos DigitTrie::search(std::string key) const
+TriPos DigitTrie::search(const std::string& key) const
 {
         // return false if DigitTrie is empty
         if (this == NULL)
@@ -124,7 +124,7 @@ TriPos DigitTrie::search(std::string key) const
         return curr->_pos;
 }
 
-TriPos DigitTrie::search(bufrefnew& key) const
+TriPos DigitTrie::search(const bufref& key) const
 {
         // return false if DigitTrie is empty
         if (this == NULL)
